@@ -3,9 +3,18 @@ import pandas as pd
 import time
 import os
 
-# Define Logo Path (Stored in App Directory)
-logo_filename = "logo.png"  # Ensure this is correct
-logo_path = os.path.join(os.getcwd(), logo_filename)  # Get full path
+
+# Ensure the logo is in the correct directory
+logo_filename = "logo.png"
+logo_path = os.path.join(os.path.dirname(__file__), logo_filename)  # Get full path
+
+st.title("Welcome to VeritasOne")
+
+# Check if the logo exists before displaying
+if os.path.exists(logo_path):
+    st.image(logo_path, use_container_width=True)
+else:
+    st.warning("⚠️ Logo file not found. Please check the filename and path.")
 
 # Simulated User Data (Mock Backend)
 user_data = {
