@@ -9,7 +9,35 @@ logo_path = os.path.join(os.path.dirname(__file__), logo_filename)  # Get full p
 
 st.sidebar.title("Veritas One")
 page = st.sidebar.radio("Navigation",
-                        ["Home", #How We Work", "How Your Data is Used", "Register", "Dashboard", "Upload Data", "Earnings", "Backend"])
+                        ["Home", "What We Do", "How Your Data is Used", "Register", "Dashboard", "Upload Data",
+                         "Earnings", "Backend"])
+
+# Simulated User Data (Mock Backend)
+user_data = {
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "dob": "1990-01-01",
+    "data_sharing": "Research Only",
+    "earnings": 15.25,
+    "fhir_data": [
+        {
+            "Date": "01-22-2025",
+            "Encounter": "Primary Care Visit",
+            "Provider": "Dr. V. Singh",
+            "Location": "Massachusetts General Hospital",
+            "Diagnosis": ["Hypertension", "Diabetes"],
+            "Medications": ["Metformin", "Lisinopril"]
+        },
+        {
+            "Date": "02-22-2025",
+            "Encounter": "Urology Outpatient",
+            "Provider": "Dr. M. Thoman",
+            "Location": "Massachusetts General Hospital",
+            "Diagnosis": ["Nephrolithiasis"],
+            "Procedures": ["Lithotripsy"]
+        }
+    ]
+}
 
 # Home Page
 if page == "Home":
@@ -26,21 +54,24 @@ if page == "Home":
     st.button("Sign Up", on_click=lambda: st.experimental_set_query_params(page="Register"))
     st.button("Log In", on_click=lambda: st.experimental_set_query_params(page="Dashboard"))
 
-# Simulated User Data (Mock Backend)
-user_data = {
-    "name": "John Doe",
-    "email": "johndoe@example.com",
-    "dob": "1990-01-01",
-    "data_sharing": "Research Only",
-    "earnings": 15.25,
-    "fhir_data": [
-        {"Recent Encounters: Primary Care Visit, Dr. V.Singh, Massachusetts General Hospital, 2025-02-01"},
-        {"Date": "2025-02-01", "Diagnosis": "Hypertension", "Diabetes"},
-        {"Date": "2025-02-01", "Medication": "Metformin", "Lisinopril"}
-    ]
-}
+# What We Do Page
+elif page == "What We Do":
+    st.title("What We Do")
+    st.markdown("""
+    **Veritas One represents a paradigm shift in patient data ownership** by enabling individuals to aggregate, access, and monetize their health records.  
+    Currently, electronic health record (EHR) fragmentation remains a substantial barrier to coordinated care, patient autonomy, and equitable data monetization.  
+    Despite health data being a multi-billion-dollar industry, patients lack direct control over their own information and receive no financial benefit from its use in research or advertising.
+
+    ### **Our platform directly addresses these challenges by:**
+    - **Providing a centralized patient-controlled health record** that integrates structured FHIR-based EHR data, faxed documents, and DICOM imaging.
+    - **Offering a transparent compensation model** where patients can opt to share de-identified data for research or identifiable data for targeted health-related advertising, ensuring ethical and controlled monetization.
+    - **Empowering patients** to reduce redundant tests, enhance care coordination, and facilitate second opinions, ultimately reducing healthcare inefficiencies and improving outcomes.
+
+    **At Veritas One, you own your health data, you control its use, and you benefit from it.**
+    """)
+
 # How Your Data is Used Page
-if page == "How Your Data is Used":
+elif page == "How Your Data is Used":
     st.title("How Your Health Data is Stored & Used")
     st.markdown("""
     At Veritas One, we use a **two-database system** to keep your identifiable and de-identified data separate. This ensures your privacy while still allowing you to benefit from data sharing.
@@ -48,55 +79,12 @@ if page == "How Your Data is Used":
     **1. Your Identifiable Data (Stored in a Secure Personal Health Record)**
     - **What it includes:** Your name, date of birth, medical history, lab results, provider notes, imaging, medications, and other personal health records.
     - **Where it’s stored:** In a secure, HIPAA-compliant personal health record that only you can access and share.
-    - **How it’s used:**
-      - For your own medical care – You can share your records with doctors, specialists, or family members.
-      - For optional personalized services – If you opt in, this data can be used to send you relevant health opportunities, such as:
-        - A clinical trial that fits your condition
-        - A better medication option for your diagnosis
-        - A discount or special offer for a treatment you already use
     - **Who can see it?** Only you, and anyone you explicitly choose to share it with.
 
     **2. Your De-Identified Data (Used for Medical Research & Insights)**
     - **What it includes:** Medical conditions, treatments, lab values, imaging findings—but with all personal identifiers removed (no name, date of birth, or anything traceable back to you).
     - **Where it’s stored:** In a separate research database used to improve medicine, public health, and clinical care.
-    - **How it’s used:**
-      - For medical research – To help researchers find trends in diseases, improve treatments, and develop new drugs.
-      - For health system improvements – To analyze patient outcomes and improve the quality of care.
-      - For public health studies – To track trends in chronic diseases, rare conditions, and medication effectiveness.
     - **Who can see it?** Researchers and healthcare analysts, but they will never see your name, contact information, or anything that could identify you.
-
-    **Your Control, Your Choice**
-
-    At Veritas One, you have full control over how your data is used. We offer three tiers of data sharing, allowing you to decide what works best for you:
-
-    **1. No Data Sharing (Strict Privacy Mode)**
-    - Your data remains completely private and is stored solely for your personal use and for use with your providers and health facilities you elect to share with.
-    - No compensation is provided.
-    - A small service fee may apply for longitudinal data storage unless financial hardship is demonstrated.
-
-    **2. De-Identified Research Only**
-    - Your health data is used for research, but all personal identifiers are removed.
-    - Researchers can analyze trends in diseases and treatments without knowing who you are.
-    - You receive **5%** of profits generated from research licensing.
-
-    **3. Full Data Sharing (Research + Advertising)**
-    - Your de-identified data is used for research **AND** you opt to share select identifiable health data (such as medications or conditions) for targeted health-related advertising.
-    - You receive **15%** of profits generated from your data.
-    - This may include personalized health offers, clinical trial opportunities, or relevant treatment options.
-
-    **Data Sharing Examples**
-
-    | Use Case | No Data Sharing | De-Identified Research Only | Full Data Sharing |
-    |----------------|-----------------|----------------------------|-------------------|
-    | Your doctor wants to review your past medical history before an appointment. | ✅ Yes | ✅ Yes | ✅ Yes |
-    | A pharmaceutical company wants to study how a new diabetes drug is affecting blood sugar levels across thousands of patients. | ❌ No | ✅ Yes | ✅ Yes |
-    | You want to get notified about a clinical trial that matches your medical history. | ❌ No | ❌ No | ✅ Yes |
-    | A hospital wants to analyze anonymous patient data to improve post-surgery recovery times. | ❌ No | ✅ Yes | ✅ Yes |
-    | You need to share your complete medical records with a new specialist. | ✅ Yes | ✅ Yes | ✅ Yes |
-    | A health tech company wants to use large-scale anonymous patient data to improve early cancer detection. | ❌ No | ✅ Yes | ✅ Yes |
-    | A pharmaceutical company wants to send you targeted offers for medications based on your current prescriptions. | ❌ No | ❌ No | ✅ Yes |
-
-    **Still have questions? We’re here to help.**
     """)
 
 # Registration Page
@@ -125,10 +113,6 @@ elif page == "Dashboard":
     st.dataframe(df)
     st.markdown("### Your Data Control")
     st.write(f"**Current Data Sharing Setting:** {user_data['data_sharing']}")
-    if st.button("Change Sharing Preferences"):
-        st.experimental_set_query_params(page="Earnings")
-    st.markdown("### Uploaded Documents")
-    st.write("No documents uploaded yet.")
     st.markdown("### Earnings Overview")
     st.metric("Total Earnings", f"${user_data['earnings']:.2f}")
 
@@ -138,19 +122,19 @@ elif page == "Upload Data":
     uploaded_file = st.file_uploader("Upload a Medical Record (PDF, JPG, PNG)", type=["pdf", "jpg", "png"])
     if uploaded_file:
         st.success(f"File '{uploaded_file.name}' uploaded successfully!")
-        st.write("Processing OCR...")
-        time.sleep(3)
-        st.write("Extracted Text: **Example Medical Report Data**")
-    st.button("Go to Dashboard", on_click=lambda: st.experimental_set_query_params(page="Dashboard"))
 
 # Earnings Page
 elif page == "Earnings":
     st.title("Your Earnings")
-    st.metric("Total Earnings", f"${user_data['earnings']:.2f}")
+    st.metric("💰 Total Earnings", f"${user_data['earnings']:.2f}")
+
     st.markdown("### Adjust Data Sharing Level")
     new_preference = st.radio("Change Sharing Preference", ["None", "Research Only (5%)", "Research + Ads (15%)"])
-    st.success(f"Updated preference: {new_preference}")
-    st.button("Go to Dashboard", on_click=lambda: st.experimental_set_query_params(page="Dashboard"))
+    st.success(f"✅ Updated preference: {new_preference}")
+
+    if st.button("Go to Dashboard"):
+        st.session_state["page"] = "Dashboard"
+        st.experimental_rerun()
 
 # Backend
 elif page == "Backend":
@@ -163,9 +147,6 @@ elif page == "Backend":
         st.success("File uploaded! Processing OCR...")
         time.sleep(2)
         st.write("Extracted Data: **Example OCR Output**")
-    st.markdown("### 3. AI-Generated Insights (Mock)")
-    st.write("- High risk for hypertension complications.")
-    st.write("- Suggests monitoring blood glucose weekly.")
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("Built for Veritas One")
