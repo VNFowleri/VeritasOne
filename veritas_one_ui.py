@@ -9,7 +9,7 @@ logo_path = os.path.join(os.path.dirname(__file__), logo_filename)  # Get full p
 
 st.sidebar.title("Veritas One")
 page = st.sidebar.radio("Navigation",
-                        ["Home", "How Your Data is Used", "Register", "Dashboard", "Upload Data", "Earnings", "Backend"])
+                        ["Home", #How We Work", "How Your Data is Used", "Register", "Dashboard", "Upload Data", "Earnings", "Backend"])
 
 # Home Page
 if page == "Home":
@@ -34,8 +34,9 @@ user_data = {
     "data_sharing": "Research Only",
     "earnings": 15.25,
     "fhir_data": [
-        {"Date": "2025-02-01", "Diagnosis": "Hypertension", "Medication": "Lisinopril"},
-        {"Date": "2025-01-15", "Diagnosis": "Diabetes", "Medication": "Metformin"}
+        {"Recent Encounters: Primary Care Visit, Dr. V.Singh, Massachusetts General Hospital, 2025-02-01"},
+        {"Date": "2025-02-01", "Diagnosis": "Hypertension", "Diabetes"},
+        {"Date": "2025-02-01", "Medication": "Metformin", "Lisinopril"}
     ]
 }
 # How Your Data is Used Page
