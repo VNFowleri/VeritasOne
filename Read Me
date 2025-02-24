@@ -1,2 +1,4 @@
 BASH:
 streamlit run veritas_one_ui.py
+
+Push to Git

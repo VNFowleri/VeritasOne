@@ -50,10 +50,6 @@ if page == "Home":
     else:
         st.warning("⚠️ Logo file not found. Please check the filename and path.")
 
-    st.markdown("### Get Started")
-    st.button("Sign Up", on_click=lambda: st.experimental_set_query_params(page="Register"))
-    st.button("Log In", on_click=lambda: st.experimental_set_query_params(page="Dashboard"))
-
 # What We Do Page
 elif page == "What We Do":
     st.title("What We Do")
