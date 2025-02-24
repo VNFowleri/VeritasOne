@@ -6,6 +6,18 @@ import os
 #Expand sidebar when page opens on mobile
 st.set_page_config(layout="wide")
 
+st.sidebar.markdown(
+    """
+    <style>
+    div[data-testid="stSidebar"] button {
+        font-size: 18px !important;
+        padding: 10px !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Ensure the logo is in the correct directory
 logo_filename = "logo.png"
 logo_path = os.path.join(os.path.dirname(__file__), logo_filename)  # Get full path
