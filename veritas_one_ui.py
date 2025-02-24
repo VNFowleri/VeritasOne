@@ -3,6 +3,9 @@ import pandas as pd
 import time
 import os
 
+#Expand sidebar when page opens on mobile
+st.set_page_config(layout="wide")
+
 # Ensure the logo is in the correct directory
 logo_filename = "logo.png"
 logo_path = os.path.join(os.path.dirname(__file__), logo_filename)  # Get full path

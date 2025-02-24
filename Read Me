@@ -1,4 +1,7 @@
-BASH:
+- Run:
 streamlit run veritas_one_ui.py
 
-Push to Git
+- Push to Git
+git add .
+git commit -m "Ensure latest code is pushed"
+git push origin main
